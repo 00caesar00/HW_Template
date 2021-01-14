@@ -52,14 +52,13 @@ understand its being a function of which letters are typed.
 
 I found the project to be quite hard, but I think it's because I was working alone. I also don't really understand how the test cases should work. Thanks.
 */
-
+using namespace std;
 #include <iostream>
-#include <example.hpp>
+#include <cctype>
 #include <assert.h>
 #include <string>
 
 int get_max_count(std::string sinput){
-  using namespace std;
   string dog=sinput ;
   //getline(cin, dog);
   //char *letters = new char(dog.size());
@@ -77,14 +76,14 @@ int get_max_count(std::string sinput){
     //Loop below is to determine uniqueness of letter
     int j = 0;
     while(j < uniques){
-      if(dog[i]==letters[j]){ //if the tested character is found in the list of unique letter we set 'found' to true and add to that letter's counter
+      if(tolower(dog[i])==letters[j]){ //if the tested character is found in the list of unique letter we set 'found' to true and add to that letter's counter
 	found=true;
 	count[j]++;
       }
       j++;
     }
     if(found==false){    //if no unique is found in the 'letters' array, then test character must be unique, and is added to 'letters' array
-      letters[uniques]=dog[i];
+      letters[uniques]=tolower(dog[i]);
       count[uniques]++;
       uniques++;
     }
@@ -102,12 +101,11 @@ int get_max_count(std::string sinput){
 }
 
 int main(int argc, char *argv[]){
-    using namespace std;
-    
+        
     if (argc >= 2){
         string test1("c++");
-        assert(get_max_count(test1) == 2);
-    } else {
+        assert(get_max_count(test1) == 2);}
+    else {
         string line; 
         cout << "Please input a string: "; 
         getline(cin, line);
